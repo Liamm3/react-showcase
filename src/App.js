@@ -1,3 +1,9 @@
-const App = () => <h1>Hello World</h1>;
+import Counter from './components/Counter'
 
-export default App;
+const App = () => (
+  <div>
+    <Counter />
+  </div>
+)
+
+export default App
