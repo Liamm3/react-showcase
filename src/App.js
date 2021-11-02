@@ -1,9 +1,10 @@
-import Counter from './components/Counter'
+import Person from './containers/Person'
+import Navbar from './components/Navbar'
 
 const App = () => (
-  <div>
-    <Counter />
-  </div>
+  <>
+    <Navbar />
+  </>
 )
 
 export default App
