@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
 
 export default function Person() {
@@ -11,5 +12,5 @@ export default function Person() {
     fetchUsers()
   }, [])
 
-  return 'Person'
+  return <h1>Persons</h1>
 }
