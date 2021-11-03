@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 export default styled.main`
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   height: 100%;
