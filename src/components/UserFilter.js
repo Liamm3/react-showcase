@@ -1,6 +1,6 @@
 import { TextField, Button, Stack } from '@mui/material'
 
-export default function PersonFilter({
+export default function UserFilter({
   searchInput,
   handleUserInput,
   searchUsers
@@ -9,7 +9,7 @@ export default function PersonFilter({
     <form onSubmit={searchUsers}>
       <Stack direction="row" spacing={2}>
         <TextField
-          label="Person name"
+          label="User name"
           variant="outlined"
           onChange={handleUserInput}
           value={searchInput}

@@ -6,7 +6,7 @@ import ListItemLink from './ListItemLink'
 export default function Sidebar({ drawerOpen, toggleDrawer }) {
   const sidebarLinks = [
     { icon: <HomeIcon />, primary: 'Home', to: '/' },
-    { icon: <PersonIcon />, primary: 'View Persons', to: '/persons' }
+    { icon: <PersonIcon />, primary: 'Users', to: '/users' }
   ]
 
   const sidebarItems = sidebarLinks.map((link, index) => (

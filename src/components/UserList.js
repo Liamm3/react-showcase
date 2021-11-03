@@ -1,10 +1,10 @@
-import PersonCard from '../components/PersonCard'
+import UserCard from './UserCard'
 import Grid from '@mui/material/Grid'
 
-export default function PersonList({ users }) {
+export default function UserList({ users }) {
   const userList = users.map((user, index) => (
     <Grid key={index} item xs={12} sm={6} md={6} lg={1}>
-      <PersonCard user={user} />
+      <UserCard user={user} />
     </Grid>
   ))
 

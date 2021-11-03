@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
 
-import PersonList from '../components/PersonList'
+import UserList from '../components/UserList'
 import FlexContentContainer from '../components/layout/FlexContentContainer'
-import PersonFilter from '../components/PersonFilter'
+import UserFilter from '../components/UserFilter'
 
-export default function Person() {
+export default function Users() {
   const [users, setUsers] = useState(null)
   const [searchInput, setSearchInput] = useState('')
   const [filteredUsers, setFilteredUsers] = useState()
@@ -41,12 +41,12 @@ export default function Person() {
     center = false
     content = (
       <>
-        <PersonFilter
+        <UserFilter
           searchInput={searchInput}
           handleUserInput={handleUserInput}
           searchUsers={searchUsers}
         />
-        <PersonList users={filteredUsers} />
+        <UserList users={filteredUsers} />
       </>
     )
   }

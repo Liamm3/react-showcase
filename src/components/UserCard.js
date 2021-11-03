@@ -1,6 +1,6 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
 
-export default function PersonCard({ user }) {
+export default function UserCard({ user }) {
   return (
     <Card>
       <CardMedia component="img" image={user.picture.large} />
