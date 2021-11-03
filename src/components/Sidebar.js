@@ -9,8 +9,13 @@ export default function Sidebar({ drawerOpen, toggleDrawer }) {
     { icon: <PersonIcon />, primary: 'View Persons', to: '/persons' }
   ]
 
-  const sidebarItems = sidebarLinks.map(link => (
-    <ListItemLink icon={link.icon} primary={link.primary} to={link.to} />
+  const sidebarItems = sidebarLinks.map((link, index) => (
+    <ListItemLink
+      key={link.primary + index}
+      icon={link.icon}
+      primary={link.primary}
+      to={link.to}
+    />
   ))
 
   return (

@@ -1,3 +1,12 @@
+import { Typography } from '@mui/material'
+import FlexContentContainer from '../components/layout/FlexContentContainer'
+
 export default function Home() {
-  return <h1>Home</h1>
+  return (
+    <FlexContentContainer center>
+      <Typography variant="h1" display="h1">
+        Home
+      </Typography>
+    </FlexContentContainer>
+  )
 }

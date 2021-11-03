@@ -1,16 +1,36 @@
-import { Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
+import { HashLoader } from 'react-spinners'
+
+import PersonList from '../components/PersonList'
+import FlexContentContainer from '../components/layout/FlexContentContainer'
 
 export default function Person() {
-  const [users, setUsers] = useState()
+  const [users, setUsers] = useState(null)
 
   useEffect(() => {
     async function fetchUsers() {
       const response = await fetch('https://randomuser.me/api/?results=10')
-      setUsers(await response.json())
+      const jsonResponse = await response.json()
+      setUsers(jsonResponse.results)
     }
-    fetchUsers()
+    setTimeout(fetchUsers, 500)
   }, [])
 
-  return <h1>Persons</h1>
+  if (!users) {
+    return (
+      <FlexContentContainer center>
+        <HashLoader
+          css={{
+            display: 'block'
+          }}
+        />
+      </FlexContentContainer>
+    )
+  }
+
+  return (
+    <FlexContentContainer>
+      <PersonList users={users} />
+    </FlexContentContainer>
+  )
 }
