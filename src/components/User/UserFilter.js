@@ -3,7 +3,8 @@ import { TextField, Button, Stack } from '@mui/material'
 export default function UserFilter({
   searchInput,
   handleUserInput,
-  searchUsers
+  searchUsers,
+  resetUsers
 }) {
   return (
     <form onSubmit={searchUsers}>
@@ -16,6 +17,9 @@ export default function UserFilter({
         />
         <Button variant="contained" onClick={searchUsers}>
           Search
+        </Button>
+        <Button variant="outlined" color="secondary" onClick={resetUsers}>
+          Reset
         </Button>
       </Stack>
     </form>

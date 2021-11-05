@@ -35,6 +35,10 @@ export default function Users() {
     setFilteredUsers(filteredUsers)
   }
 
+  const resetUsers = () => {
+    setFilteredUsers(users)
+    setSearchInput('')
+  }
   let center = true
   let content = <HashLoader css={{ display: 'block' }} />
 
@@ -50,9 +54,10 @@ export default function Users() {
             searchInput={searchInput}
             handleUserInput={handleUserInput}
             searchUsers={searchUsers}
+            resetUsers={resetUsers}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <UserList users={filteredUsers} />
         </Grid>
       </Grid>

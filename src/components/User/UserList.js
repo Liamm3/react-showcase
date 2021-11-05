@@ -9,10 +9,8 @@ export default function UserList({ users }) {
   ))
 
   return (
-    <>
-      <Grid container spacing={2}>
-        {userList}
-      </Grid>
-    </>
+    <Grid container spacing={2}>
+      {userList}
+    </Grid>
   )
 }
