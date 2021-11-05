@@ -18,7 +18,7 @@ function App() {
       <Navbar toggleDrawer={toggleDrawer} />
       <Sidebar toggleDrawer={toggleDrawer} drawerOpen={drawerOpen} />
       <Switch>
-        <Route path="/users" component={Users} />
+        <Route path="/users" component={Users} exact />
         <Route path="/" component={Home} />
       </Switch>
     </>
