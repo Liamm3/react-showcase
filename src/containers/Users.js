@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
-import { Typography, Grid } from '@mui/material'
+import { Typography, Grid, Button } from '@mui/material'
 
 import UserCardList from '../components/User/UserCardList'
 import UserDataGrid from '../components/User/UserDataGrid'
 import FlexContentContainer from '../components/layout/FlexContentContainer'
 import UserFilter from '../components/User/UserFilter'
 import UserDisplayView from '../components/User/UserDisplayView'
+import UserActions from '../components/User/UserActions'
 
 export default function Users() {
   const [users, setUsers] = useState(null)
@@ -45,6 +46,7 @@ export default function Users() {
     setFilteredUsers(users)
     setSearchInput('')
   }
+
   let center = true
   let content = <HashLoader css={{ display: 'block' }} />
   let usersListView = <UserCardList users={filteredUsers} />
@@ -63,14 +65,12 @@ export default function Users() {
           </Typography>
         </Grid>
         <Grid item container xs={12} justifyContent="space-between">
-          <UserFilter
+          <UserActions
             searchInput={searchInput}
             handleUserInput={handleUserInput}
             searchUsers={searchUsers}
             resetUsers={resetUsers}
-          />
-          <UserDisplayView
-            changeDisplayView={() => setUseDataGrid(!useDataGrid)}
+            toggleDataGrid={() => setUseDataGrid(!useDataGrid)}
           />
         </Grid>
         <Grid item xs={12}>
