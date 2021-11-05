@@ -1,4 +1,11 @@
-import { Card, CardContent, CardMedia, Typography, Paper } from '@mui/material'
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Typography,
+  Button
+} from '@mui/material'
 
 export default function UserCard({ user }) {
   return (
@@ -6,9 +13,15 @@ export default function UserCard({ user }) {
       <CardMedia component="img" image={user.picture.large} />
       <CardContent>
         <Typography>
-          {user.name.first} {user.name.last}
+          Name: {user.name.first} {user.name.last}
+        </Typography>
+        <Typography>
+          Email: <a href={`mailto:${user.email}`}>{user.email}</a>
         </Typography>
       </CardContent>
+      <CardActions>
+        <Button variant="contained">Show</Button>
+      </CardActions>
     </Card>
   )
 }

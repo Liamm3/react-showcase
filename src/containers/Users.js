@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
+import { Typography, Grid } from '@mui/material'
 
 import UserList from '../components/User/UserList'
 import FlexContentContainer from '../components/layout/FlexContentContainer'
@@ -8,7 +9,7 @@ import UserFilter from '../components/User/UserFilter'
 export default function Users() {
   const [users, setUsers] = useState(null)
   const [searchInput, setSearchInput] = useState('')
-  const [filteredUsers, setFilteredUsers] = useState()
+  const [filteredUsers, setFilteredUsers] = useState(null)
 
   useEffect(() => {
     async function fetchUsers() {
@@ -29,7 +30,7 @@ export default function Users() {
   const searchUsers = e => {
     e.preventDefault()
     const filteredUsers = users.filter(user =>
-      user.name.first.toLowerCase().includes(searchInput)
+      user.name.first.toLowerCase().includes(searchInput.toLowerCase())
     )
     setFilteredUsers(filteredUsers)
   }
@@ -40,14 +41,21 @@ export default function Users() {
   if (filteredUsers) {
     center = false
     content = (
-      <>
-        <UserFilter
-          searchInput={searchInput}
-          handleUserInput={handleUserInput}
-          searchUsers={searchUsers}
-        />
-        <UserList users={filteredUsers} />
-      </>
+      <Grid container rowSpacing={2}>
+        <Typography variant="h2" display="h1">
+          Users
+        </Typography>
+        <Grid item xs={12}>
+          <UserFilter
+            searchInput={searchInput}
+            handleUserInput={handleUserInput}
+            searchUsers={searchUsers}
+          />
+        </Grid>
+        <Grid item>
+          <UserList users={filteredUsers} />
+        </Grid>
+      </Grid>
     )
   }
 
