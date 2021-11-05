@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
 
-import UserList from '../components/UserList'
+import UserList from '../components/User/UserList'
 import FlexContentContainer from '../components/layout/FlexContentContainer'
-import UserFilter from '../components/UserFilter'
+import UserFilter from '../components/User/UserFilter'
 
 export default function Users() {
   const [users, setUsers] = useState(null)

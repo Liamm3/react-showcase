@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Card, CardContent, CardMedia, Typography, Paper } from '@mui/material'
 
 export default function UserCard({ user }) {
   return (
