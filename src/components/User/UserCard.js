@@ -6,6 +6,7 @@ import {
   Typography,
   Button
 } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 export default function UserCard({ user }) {
   return (
@@ -20,7 +21,9 @@ export default function UserCard({ user }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="contained">Show</Button>
+        <Button component={Link} to={`/users/${user.id}`} variant="contained">
+          Show
+        </Button>
       </CardActions>
     </Card>
   )

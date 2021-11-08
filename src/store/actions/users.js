@@ -20,7 +20,7 @@ export const fetchUsers = () => async dispatch => {
     const { data } = await axios.get('https://randomuser.me/api?results=50')
     const users = data.results.map((user, index) => ({
       ...user,
-      id: index
+      id: index + 1
     }))
     dispatch(fetchUsersSucces(users))
   } catch (error) {
