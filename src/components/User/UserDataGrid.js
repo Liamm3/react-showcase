@@ -24,7 +24,6 @@ export default function UserDataGrid({ users }) {
     }
   ]
 
-  console.log(users)
   return (
     <div>
       <DataGrid

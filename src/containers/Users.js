@@ -1,33 +1,28 @@
 import { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
-import { Typography, Grid, Button } from '@mui/material'
+import { Typography, Grid } from '@mui/material'
+import { connect, useDispatch, useSelector } from 'react-redux'
 
+import { fetchUsers } from '../store/actions/users'
 import UserCardList from '../components/User/UserCardList'
 import UserDataGrid from '../components/User/UserDataGrid'
 import FlexContentContainer from '../components/layout/FlexContentContainer'
-import UserFilter from '../components/User/UserFilter'
-import UserDisplayView from '../components/User/UserDisplayView'
 import UserActions from '../components/User/UserActions'
 
-export default function Users() {
-  const [users, setUsers] = useState(null)
+function Users() {
+  const dispatch = useDispatch()
+  const { users } = useSelector(state => state.users)
   const [searchInput, setSearchInput] = useState('')
   const [filteredUsers, setFilteredUsers] = useState(null)
   const [useDataGrid, setUseDataGrid] = useState(false)
 
   useEffect(() => {
-    async function fetchUsers() {
-      const response = await fetch('https://randomuser.me/api/?results=50')
-      const jsonResponse = await response.json()
-      const jsonUsers = jsonResponse.results.map((user, index) => ({
-        ...user,
-        id: index
-      }))
-      setUsers(jsonUsers)
-      setFilteredUsers(jsonUsers)
+    if (!users) {
+      dispatch(fetchUsers())
+    } else if (!filteredUsers) {
+      setFilteredUsers(users)
     }
-    setTimeout(fetchUsers, 500)
-  }, [])
+  }, [dispatch, users, filteredUsers])
 
   const handleUserInput = e => {
     const input = e.target.value.trim()
@@ -82,3 +77,5 @@ export default function Users() {
 
   return <FlexContentContainer center={center}>{content}</FlexContentContainer>
 }
+
+export default connect()(Users)

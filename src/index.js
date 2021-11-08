@@ -6,17 +6,21 @@ import '@fontsource/roboto/700.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
-import reportWebVitals from './reportWebVitals'
+import { Provider } from 'react-redux'
 
+import reportWebVitals from './reportWebVitals'
 import './index.css'
 import App from './App'
+import store from './store'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <Router>
+        <App />
+      </Router>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 )
 
