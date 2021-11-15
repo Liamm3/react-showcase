@@ -4,14 +4,13 @@ import { Typography, Grid } from '@mui/material'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
 import { fetchUsers } from '../store/users'
-import UserCardList from '../components/User/UserCardList'
-import UserDataGrid from '../components/User/UserDataGrid'
-import FlexContentContainer from '../components/layout/FlexContentContainer'
-import UserActions from '../components/User/UserActions'
+import UserCardList from '../components/user/UserCardList'
+import UserDataGrid from '../components/user/UserDataGrid'
+import UserActions from '../components/user/UserActions'
 
 function Users() {
   const dispatch = useDispatch()
-  const { users } = useSelector(state => state.users)
+  const { users, loading } = useSelector(state => state.users)
   const [searchInput, setSearchInput] = useState('')
   const [filteredUsers, setFilteredUsers] = useState(null)
   const [useDataGrid, setUseDataGrid] = useState(false)
@@ -42,40 +41,45 @@ function Users() {
     setSearchInput('')
   }
 
-  let center = true
-  let content = <HashLoader css={{ display: 'block' }} />
-  let usersListView = <UserCardList users={filteredUsers} />
-
-  if (useDataGrid) {
-    usersListView = <UserDataGrid users={filteredUsers} />
-  }
-
-  if (filteredUsers) {
-    center = false
-    content = (
-      <Grid container rowSpacing={2}>
-        <Grid item>
-          <Typography variant="h2" display="h1">
-            Users
-          </Typography>
-        </Grid>
-        <Grid item container xs={12} justifyContent="space-between">
-          <UserActions
-            searchInput={searchInput}
-            handleUserInput={handleUserInput}
-            searchUsers={searchUsers}
-            resetUsers={resetUsers}
-            toggleDataGrid={() => setUseDataGrid(!useDataGrid)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          {usersListView}
-        </Grid>
+  if (!filteredUsers || !users) {
+    return (
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        style={{ height: '100%' }}
+      >
+        <HashLoader css={{ display: 'block' }} />
       </Grid>
     )
   }
 
-  return <FlexContentContainer center={center}>{content}</FlexContentContainer>
+  let userList = <UserCardList users={filteredUsers} />
+  if (useDataGrid) {
+    userList = <UserDataGrid users={filteredUsers} />
+  }
+
+  return (
+    <Grid container spacing={2}>
+      <Grid item>
+        <Typography variant="h2" display="h1">
+          Users
+        </Typography>
+      </Grid>
+      <Grid item container xs={12} justifyContent="space-between">
+        <UserActions
+          searchInput={searchInput}
+          handleUserInput={handleUserInput}
+          searchUsers={searchUsers}
+          resetUsers={resetUsers}
+          toggleDataGrid={() => setUseDataGrid(!useDataGrid)}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        {userList}
+      </Grid>
+    </Grid>
+  )
 }
 
 export default connect()(Users)

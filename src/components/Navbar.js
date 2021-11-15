@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 export default function Navbar({ toggleDrawer }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="sticky">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             size="large"

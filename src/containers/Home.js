@@ -1,12 +1,18 @@
-import { Typography } from '@mui/material'
-import FlexContentContainer from '../components/layout/FlexContentContainer'
+import { Typography, Grid } from '@mui/material'
 
-export default function Home() {
+function Home() {
   return (
-    <FlexContentContainer center>
+    <Grid
+      container
+      justifyContent="center"
+      alignContent="center"
+      style={{ height: '100%' }}
+    >
       <Typography variant="h1" display="h1">
         Home
       </Typography>
-    </FlexContentContainer>
+    </Grid>
   )
 }
+
+export default Home
