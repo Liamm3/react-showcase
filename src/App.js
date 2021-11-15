@@ -5,7 +5,7 @@ import Users from './containers/Users'
 import Navbar from './components/Navbar'
 import Home from './containers/Home'
 import Sidebar from './components/Sidebar'
-import UserDetail from './components/User/User.Detail'
+import UserDetail from './components/User/UserDetail'
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState()

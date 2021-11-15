@@ -1,11 +1,6 @@
-import * as actions from '../actions/types'
+import * as actions from './types'
 import { updateObject } from '../../util'
-
-const intialState = {
-  users: null,
-  error: null,
-  loading: false
-}
+import initialState from './initialState'
 
 const fetchUsersStart = state => updateObject(state, { loading: true })
 
@@ -20,7 +15,7 @@ const addUser = (state, { payload: user }) =>
     users: [...state.users, user]
   })
 
-export default function reducer(state = intialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case actions.FETCH_USERS_START:
       return fetchUsersStart(state)

@@ -3,7 +3,7 @@ import { HashLoader } from 'react-spinners'
 import { Typography, Grid } from '@mui/material'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
-import { fetchUsers } from '../store/actions/users'
+import { fetchUsers } from '../store/users'
 import UserCardList from '../components/User/UserCardList'
 import UserDataGrid from '../components/User/UserDataGrid'
 import FlexContentContainer from '../components/layout/FlexContentContainer'
@@ -32,7 +32,7 @@ function Users() {
   const searchUsers = e => {
     e.preventDefault()
     const filteredUsers = users.filter(user =>
-      user.name.first.toLowerCase().includes(searchInput.toLowerCase())
+      user.username.toLowerCase().includes(searchInput.toLowerCase())
     )
     setFilteredUsers(filteredUsers)
   }

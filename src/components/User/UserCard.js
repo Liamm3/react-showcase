@@ -11,11 +11,9 @@ import { Link } from 'react-router-dom'
 export default function UserCard({ user }) {
   return (
     <Card>
-      <CardMedia component="img" image={user.picture.large} />
+      <CardMedia component="img" image="https://via.placeholder.com/150" />
       <CardContent>
-        <Typography>
-          Name: {user.name.first} {user.name.last}
-        </Typography>
+        <Typography>Username: {user.username}</Typography>
         <Typography>
           Email: <a href={`mailto:${user.email}`}>{user.email}</a>
         </Typography>
