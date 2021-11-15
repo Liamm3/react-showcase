@@ -1,13 +1,18 @@
 import { Grid, TextField, Typography, Button } from '@mui/material'
 import { useState } from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux'
+
+import { login } from '../store/auth'
 
 function Login() {
+  const { error, token } = useSelector(state => state.auth)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
   const handleSubmit = e => {
     e.preventDefault()
-    //
+    dispatch(login(email, password))
   }
 
   return (
@@ -51,8 +56,9 @@ function Login() {
           </Grid>
         </Grid>
       </form>
+      {error ? error.message : null}
     </>
   )
 }
 
-export default Login
+export default connect()(Login)
