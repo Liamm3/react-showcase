@@ -4,11 +4,11 @@ import initialState from './initialState'
 
 const fetchUsersStart = state => updateObject(state, { loading: true })
 
-const fetchUsersSucces = (state, { payload: users }) =>
-  updateObject(state, { users })
+const fetchUsersSuccess = (state, { payload: users }) =>
+  updateObject(state, { users, loading: false })
 
 const fetchUsersFailed = (state, { payload: error }) =>
-  updateObject(state, { error })
+  updateObject(state, { error, loading: false })
 
 const addUser = (state, { payload: user }) =>
   updateObject(state, {
@@ -20,7 +20,7 @@ export default function reducer(state = initialState, action) {
     case actions.FETCH_USERS_START:
       return fetchUsersStart(state)
     case actions.FETCH_USERS_SUCCESS:
-      return fetchUsersSucces(state, action)
+      return fetchUsersSuccess(state, action)
     case actions.FETCH_USERS_FAILED:
       return fetchUsersFailed(state, action)
     case actions.ADD_USER:

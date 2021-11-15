@@ -10,7 +10,7 @@ import UserActions from '../components/user/UserActions'
 
 function Users() {
   const dispatch = useDispatch()
-  const { users, loading } = useSelector(state => state.users)
+  const { users } = useSelector(state => state.users)
   const [searchInput, setSearchInput] = useState('')
   const [filteredUsers, setFilteredUsers] = useState(null)
   const [useDataGrid, setUseDataGrid] = useState(false)
@@ -41,7 +41,8 @@ function Users() {
     setSearchInput('')
   }
 
-  if (!filteredUsers || !users) {
+  // TODO: use only loading
+  if (!users || !filteredUsers) {
     return (
       <Grid
         container
