@@ -10,7 +10,7 @@ export default function UserFilter({
     <form onSubmit={searchUsers}>
       <Stack direction="row" spacing={2}>
         <TextField
-          label="User name"
+          label="Username"
           variant="outlined"
           onChange={handleUserInput}
           value={searchInput}
