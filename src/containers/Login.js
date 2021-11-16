@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography, Button } from '@mui/material'
+import { Grid, TextField, Typography, Button, Alert } from '@mui/material'
 import { useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
@@ -13,6 +13,18 @@ function Login() {
   const handleSubmit = e => {
     e.preventDefault()
     dispatch(login(email, password))
+  }
+
+  const renderAlert = () => {
+    if (error) {
+      return <Alert severity="error">{error.message}</Alert>
+    }
+  }
+
+  const renderSuccess = () => {
+    if (token) {
+      return <Alert severity="success">Successfully logged in!</Alert>
+    }
   }
 
   return (
@@ -56,7 +68,8 @@ function Login() {
           </Grid>
         </Grid>
       </form>
-      {error ? error.message : null}
+      {renderAlert()}
+      {renderSuccess()}
     </>
   )
 }

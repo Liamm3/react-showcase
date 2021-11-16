@@ -2,7 +2,8 @@ import { updateObject } from '../../util'
 import initialState from './initialState'
 import * as types from './types'
 
-const loginStart = state => updateObject(state, { loading: true })
+const loginStart = state =>
+  updateObject(state, { loading: true, error: null, token: null })
 
 const loginSuccess = (state, { payload: token }) =>
   updateObject(state, { token, loading: false })
