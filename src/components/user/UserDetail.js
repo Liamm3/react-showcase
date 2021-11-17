@@ -2,7 +2,6 @@ import { connect, useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 
 import { fetchUsers } from '../../store/users'
-import FlexContentContainer from '../layout/FlexContentContainer'
 
 function UserDetail(props) {
   const dispatch = useDispatch()
@@ -20,7 +19,7 @@ function UserDetail(props) {
   const { id } = props.match.params
   const user = users.find(user => `${user.id}` === id)
 
-  return <FlexContentContainer center>{user.username}</FlexContentContainer>
+  return <p>{user.username}</p>
 }
 
 export default connect()(UserDetail)
