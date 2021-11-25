@@ -8,6 +8,15 @@ const LOGIN = gql`
   }
 `
 
+const REGISTER = gql`
+  mutation register($user: RegisterUserInput!) {
+    register(user: $user) {
+      email
+      password
+    }
+  }
+`
+
 const GET_VIEWER_ID = gql`
   query viewer {
     viewer {
@@ -40,7 +49,7 @@ const slice = createSlice({
       state.token = action.payload
     },
     loginFail: (state, action) => {
-      state.loading = true
+      state.loading = false
       state.error = action.payload
     },
     setViewerSuccess: (state, action) => {
@@ -54,12 +63,30 @@ const slice = createSlice({
       localStorage.removeItem('viewerId')
       state.token = null
       state.viewerId = null
+    },
+    registerStart: state => {
+      state.loading = true
+      state.viewerId = null
+      state.token = null
+    },
+    registerSuccess: (state, action) => {},
+    registerFail: (state, action) => {
+      state.error = action.payload
+      state.loading = false
     }
   }
 })
 
-const { loginStart, loginFail, loginSuccess, setViewerSuccess, setViewerFail } =
-  slice.actions
+const {
+  loginStart,
+  loginFail,
+  loginSuccess,
+  setViewerSuccess,
+  setViewerFail,
+  registerStart,
+  registerFail,
+  registerSuccess
+} = slice.actions
 export const { logout } = slice.actions
 
 const setViewer = () => async dispatch => {
@@ -73,6 +100,24 @@ const setViewer = () => async dispatch => {
     dispatch(setViewerFail(err))
   }
 }
+
+export const register =
+  (email, username, password) =>
+  async (dispatch, _, { client }) => {
+    dispatch(registerStart())
+    try {
+      const user = { email, username, password }
+      const { data } = await client.mutate({
+        mutation: REGISTER,
+        variables: { user }
+      })
+      dispatch(registerSuccess())
+      dispatch(login(email, password))
+    } catch (err) {
+      console.log(err)
+      dispatch(registerFail(err))
+    }
+  }
 
 export const login =
   (email, password) =>

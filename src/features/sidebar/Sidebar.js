@@ -1,6 +1,8 @@
 import PersonIcon from '@mui/icons-material/Person'
 import HomeIcon from '@mui/icons-material/Home'
 import LoginIcon from '@mui/icons-material/Login'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Drawer, List, Box } from '@mui/material'
 
@@ -13,8 +15,19 @@ export default function Sidebar({ drawerOpen, toggleDrawer }) {
     { icon: <HomeIcon />, primary: 'Home', to: '/' },
     { icon: <PersonIcon />, primary: 'Users', to: '/users', authOnly: true },
     { icon: <LoginIcon />, primary: 'Login', to: '/login', guestOnly: true },
+    {
+      icon: <AutoAwesomeIcon />,
+      primary: 'Register',
+      to: '/register',
+      guestOnly: true
+    },
     { icon: <LogoutIcon />, primary: 'Logout', to: '/logout', authOnly: true },
-    { icon: <PersonIcon />, primary: 'My Profile', to: '/self', authOnly: true }
+    {
+      icon: <AccountCircleIcon />,
+      primary: 'My Profile',
+      to: '/self',
+      authOnly: true
+    }
   ]
 
   const sidebarItems = sidebarLinks.map((link, index) => {

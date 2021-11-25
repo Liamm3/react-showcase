@@ -9,12 +9,14 @@ import UserDetail from '../features/users/UserDetail'
 import Login from '../features/auth/Login'
 import Logout from '../features/auth/Logout'
 import Viewer from '../features/viewer/Viewer'
+import Register from '../features/auth/Register'
 
 function Routes() {
   return (
     <Switch>
       <PrivateRoute path="/logout" component={Logout} />
       <GuestRoute path="/login" component={Login} />
+      <GuestRoute path="/register" component={Register} />
       <PrivateRoute path="/users/:id" component={UserDetail} />
       <PrivateRoute path="/users" component={Users} exact />
       <PrivateRoute path="/self" component={Viewer} exact />
