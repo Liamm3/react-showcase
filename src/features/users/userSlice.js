@@ -57,6 +57,19 @@ export const selectFilteredUsers = state => {
   }
 }
 export const selectFilter = state => state.users.filter
+export const selectUser = id => state => {
+  const { users } = state.users
+  if (users) {
+    return users.find(user => user.id === id)
+  }
+}
+export const selectOwnUser = state => {
+  const { viewerId } = state.auth
+  const { users } = state.users
+  if (users) {
+    return users.find(user => user.id === viewerId)
+  }
+}
 
 export const fetchUsers =
   () =>

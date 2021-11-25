@@ -6,6 +6,7 @@ import Home from '../features/home/Home'
 import UserDetail from '../features/users/UserDetail'
 import Login from '../features/auth/Login'
 import PrivateRoute from './PrivateRoute'
+import Viewer from '../features/viewer/Viewer'
 
 function Routes() {
   return (
@@ -13,6 +14,7 @@ function Routes() {
       <Route path="/login" component={Login} />
       <PrivateRoute path="/users/:id" component={UserDetail} />
       <PrivateRoute path="/users" component={Users} exact />
+      <PrivateRoute path="/self" component={Viewer} exact />
       <Route path="/" component={Home} />
     </Switch>
   )

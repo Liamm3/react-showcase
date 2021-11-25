@@ -10,7 +10,8 @@ export default function Sidebar({ drawerOpen, toggleDrawer }) {
   const sidebarLinks = [
     { icon: <HomeIcon />, primary: 'Home', to: '/' },
     { icon: <PersonIcon />, primary: 'Users', to: '/users', authOnly: true },
-    { icon: <LoginIcon />, primary: 'Login', to: '/login' }
+    { icon: <LoginIcon />, primary: 'Login', to: '/login' },
+    { icon: <PersonIcon />, primary: 'My Profile', to: '/self' }
   ]
 
   const sidebarItems = sidebarLinks.map((link, index) => {

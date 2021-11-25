@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { gql } from '@apollo/client'
+import client from '../../app/client'
 
 const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -7,8 +8,20 @@ const LOGIN = gql`
   }
 `
 
+const GET_VIEWER_ID = gql`
+  query viewer {
+    viewer {
+      id
+    }
+  }
+`
+
+const token = localStorage.getItem('token')
+const viewerId = localStorage.getItem('viewerId')
+
 const initialState = {
-  token: null,
+  token,
+  viewerId,
   loading: false,
   error: null
 }
@@ -29,11 +42,30 @@ const slice = createSlice({
     loginFail: (state, action) => {
       state.loading = true
       state.error = action.payload
+    },
+    setViewerSuccess: (state, action) => {
+      state.viewerId = action.payload
+    },
+    setViewerFail: (state, action) => {
+      state.error = action.payload
     }
   }
 })
 
-const { loginStart, loginFail, loginSuccess } = slice.actions
+const { loginStart, loginFail, loginSuccess, setViewerSuccess, setViewerFail } =
+  slice.actions
+
+const setViewer = () => async dispatch => {
+  try {
+    const { data } = await client.query({
+      query: GET_VIEWER_ID
+    })
+    dispatch(setViewerSuccess(data.viewer.id))
+    localStorage.setItem('viewerId', data.viewer.id)
+  } catch (err) {
+    dispatch(setViewerFail(err))
+  }
+}
 
 export const login =
   (email, password) =>
@@ -48,6 +80,8 @@ export const login =
         }
       })
       dispatch(loginSuccess(data.login))
+      localStorage.setItem('token', data.login)
+      dispatch(setViewer())
     } catch (err) {
       dispatch(loginFail(err))
     }
@@ -55,5 +89,6 @@ export const login =
 
 export const selectToken = state => state.auth.token
 export const selectError = state => state.auth.error
+export const selectViewerId = state => state.auth.viewerId
 
 export default slice.reducer
