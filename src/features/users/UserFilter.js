@@ -15,9 +15,6 @@ export default function UserFilter({
           onChange={handleUserInput}
           value={searchInput}
         />
-        <Button variant="contained" onClick={searchUsers}>
-          Search
-        </Button>
         <Button variant="outlined" color="secondary" onClick={resetUsers}>
           Reset
         </Button>

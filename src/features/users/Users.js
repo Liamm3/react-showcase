@@ -3,46 +3,30 @@ import { HashLoader } from 'react-spinners'
 import { Typography, Grid } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchUsers, selectUsers } from './userSlice'
+import {
+  fetchUsers,
+  selectFilteredUsers,
+  setFilterSearchTerm,
+  selectFilter
+} from './userSlice'
 import UserCardList from './UserCardList'
 import UserDataGrid from './UserDataGrid'
 import UserActions from './UserActions'
 
 export default function Users() {
   const dispatch = useDispatch()
-  const users = useSelector(selectUsers)
-  const [searchInput, setSearchInput] = useState('')
-  const [filteredUsers, setFilteredUsers] = useState(null)
+  const users = useSelector(selectFilteredUsers)
+  const { searchTerm } = useSelector(selectFilter)
   const [useDataGrid, setUseDataGrid] = useState(false)
 
   useEffect(() => {
     if (!users) {
       dispatch(fetchUsers())
-    } else if (!filteredUsers) {
-      setFilteredUsers(users)
     }
-  }, [dispatch, users, filteredUsers])
-
-  const handleUserInput = e => {
-    const input = e.target.value.trim()
-    setSearchInput(input)
-  }
-
-  const searchUsers = e => {
-    e.preventDefault()
-    const filteredUsers = users.filter(user =>
-      user.username.toLowerCase().includes(searchInput.toLowerCase())
-    )
-    setFilteredUsers(filteredUsers)
-  }
-
-  const resetUsers = () => {
-    setFilteredUsers(users)
-    setSearchInput('')
-  }
+  }, [dispatch, users])
 
   // TODO: use only loading
-  if (!users || !filteredUsers) {
+  if (!users) {
     return (
       <Grid
         container
@@ -55,9 +39,9 @@ export default function Users() {
     )
   }
 
-  let userList = <UserCardList users={filteredUsers} />
+  let userList = <UserCardList users={users} />
   if (useDataGrid) {
-    userList = <UserDataGrid users={filteredUsers} />
+    userList = <UserDataGrid users={users} />
   }
 
   return (
@@ -69,10 +53,11 @@ export default function Users() {
       </Grid>
       <Grid item container xs={12} justifyContent="space-between">
         <UserActions
-          searchInput={searchInput}
-          handleUserInput={handleUserInput}
-          searchUsers={searchUsers}
-          resetUsers={resetUsers}
+          searchInput={searchTerm}
+          handleUserInput={e =>
+            dispatch(setFilterSearchTerm(e.target.value.trim()))
+          }
+          resetUsers={e => dispatch(setFilterSearchTerm(''))}
           toggleDataGrid={() => setUseDataGrid(!useDataGrid)}
         />
       </Grid>

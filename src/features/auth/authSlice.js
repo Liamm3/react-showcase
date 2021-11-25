@@ -39,7 +39,6 @@ export const login =
   (email, password) =>
   async (dispatch, _, { client }) => {
     dispatch(loginStart())
-    console.log(password)
     try {
       const { data } = await client.mutate({
         mutation: LOGIN,

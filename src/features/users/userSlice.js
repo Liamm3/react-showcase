@@ -14,7 +14,10 @@ const GET_ALL_USERS = gql`
 const initialState = {
   users: null,
   error: null,
-  loading: false
+  loading: false,
+  filter: {
+    searchTerm: ''
+  }
 }
 
 const slice = createSlice({
@@ -33,13 +36,27 @@ const slice = createSlice({
     fetchUsersFail: (state, action) => {
       state.loading = false
       state.error = action.payload
+    },
+    setFilterSearchTerm: (state, action) => {
+      state.filter.searchTerm = action.payload
     }
   }
 })
 
 const { fetchUsersFail, fetchUsersStart, fetchUsersSuccess } = slice.actions
+export const { setFilterSearchTerm } = slice.actions
 
 export const selectUsers = state => state.users.users
+export const selectFilteredUsers = state => {
+  const { users, filter } = state.users
+  const { searchTerm } = filter
+  if (users) {
+    return users.filter(user =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }
+}
+export const selectFilter = state => state.users.filter
 
 export const fetchUsers =
   () =>
