@@ -2,6 +2,7 @@ import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import PrivateRoute from './PrivateRoute'
+import GuestRoute from './GuestRoute'
 import Users from '../features/users/Users'
 import Home from '../features/home/Home'
 import UserDetail from '../features/users/UserDetail'
@@ -13,7 +14,7 @@ function Routes() {
   return (
     <Switch>
       <PrivateRoute path="/logout" component={Logout} />
-      <Route path="/login" component={Login} />
+      <GuestRoute path="/login" component={Login} />
       <PrivateRoute path="/users/:id" component={UserDetail} />
       <PrivateRoute path="/users" component={Users} exact />
       <PrivateRoute path="/self" component={Viewer} exact />
