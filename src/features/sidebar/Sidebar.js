@@ -1,17 +1,20 @@
 import PersonIcon from '@mui/icons-material/Person'
 import HomeIcon from '@mui/icons-material/Home'
 import LoginIcon from '@mui/icons-material/Login'
+import LogoutIcon from '@mui/icons-material/Logout'
 import { Drawer, List, Box } from '@mui/material'
 
 import ListItemLink from './ListItemLink'
 import PrivateListItemLink from './PrivateListItemLink'
+import GuestListItemLink from './GuestListItemLink'
 
 export default function Sidebar({ drawerOpen, toggleDrawer }) {
   const sidebarLinks = [
     { icon: <HomeIcon />, primary: 'Home', to: '/' },
     { icon: <PersonIcon />, primary: 'Users', to: '/users', authOnly: true },
-    { icon: <LoginIcon />, primary: 'Login', to: '/login' },
-    { icon: <PersonIcon />, primary: 'My Profile', to: '/self' }
+    { icon: <LoginIcon />, primary: 'Login', to: '/login', guestOnly: true },
+    { icon: <LogoutIcon />, primary: 'Logout', to: '/logout', authOnly: true },
+    { icon: <PersonIcon />, primary: 'My Profile', to: '/self', authOnly: true }
   ]
 
   const sidebarItems = sidebarLinks.map((link, index) => {
@@ -23,6 +26,9 @@ export default function Sidebar({ drawerOpen, toggleDrawer }) {
     }
     if (link.authOnly) {
       return <PrivateListItemLink {...props} />
+    }
+    if (link.guestOnly) {
+      return <GuestListItemLink {...props} />
     }
     return <ListItemLink {...props} />
   })

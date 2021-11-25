@@ -48,12 +48,19 @@ const slice = createSlice({
     },
     setViewerFail: (state, action) => {
       state.error = action.payload
+    },
+    logout: state => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('viewerId')
+      state.token = null
+      state.viewerId = null
     }
   }
 })
 
 const { loginStart, loginFail, loginSuccess, setViewerSuccess, setViewerFail } =
   slice.actions
+export const { logout } = slice.actions
 
 const setViewer = () => async dispatch => {
   try {

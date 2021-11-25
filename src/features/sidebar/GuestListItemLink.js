@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import ListItemLink from './ListItemLink'
 import { selectToken } from '../auth/authSlice'
 
-export default function PrivateListItemLink(props) {
+export default function GuestListItemLink(props) {
   const token = useSelector(selectToken)
-  if (token) {
+  if (!token) {
     return <ListItemLink {...props} />
   }
 

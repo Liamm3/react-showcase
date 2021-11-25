@@ -1,9 +1,12 @@
 import { Route, useHistory } from 'react-router-dom'
-import { connect, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-function PrivateRoute(props) {
-  const { token } = useSelector(state => state.auth)
+import { selectToken } from '../features/auth/authSlice'
+
+export default function PrivateRoute(props) {
+  const token = useSelector(selectToken)
   const history = useHistory()
+
   if (token) {
     return <Route {...props} />
   }
@@ -11,5 +14,3 @@ function PrivateRoute(props) {
   history.push('/login')
   return null
 }
-
-export default connect()(PrivateRoute)
