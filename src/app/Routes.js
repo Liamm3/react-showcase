@@ -1,10 +1,10 @@
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import Users from './Users'
-import Home from './Home'
-import UserDetail from '../components/user/UserDetail'
-import Login from './Login'
+import Users from '../features/users/Users'
+import Home from '../features/home/Home'
+import UserDetail from '../features/users/UserDetail'
+import Login from '../features/auth/Login'
 import PrivateRoute from './PrivateRoute'
 
 function Routes() {

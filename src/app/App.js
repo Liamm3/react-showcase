@@ -1,9 +1,9 @@
 import { Container } from '@mui/material'
 import { useState } from 'react'
 
-import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
-import Routes from './containers/Routes'
+import Navbar from '../features/navbar/Navbar'
+import Sidebar from '../features/sidebar/Sidebar'
+import Routes from './Routes'
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState()

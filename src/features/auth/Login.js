@@ -1,14 +1,15 @@
 import { Grid, TextField, Typography, Button, Alert } from '@mui/material'
 import { useState } from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { login } from '../store/auth'
+import { login, selectToken, selectError } from './authSlice'
 
-function Login() {
-  const { error, token } = useSelector(state => state.auth)
+export default function Login() {
+  const dispatch = useDispatch()
+  const token = useSelector(selectToken)
+  const error = useSelector(selectError)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const dispatch = useDispatch()
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -73,5 +74,3 @@ function Login() {
     </>
   )
 }
-
-export default connect()(Login)

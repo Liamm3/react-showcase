@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners'
 import { Typography, Grid } from '@mui/material'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchUsers } from '../store/users'
-import UserCardList from '../components/user/UserCardList'
-import UserDataGrid from '../components/user/UserDataGrid'
-import UserActions from '../components/user/UserActions'
+import { fetchUsers, selectUsers } from './userSlice'
+import UserCardList from './UserCardList'
+import UserDataGrid from './UserDataGrid'
+import UserActions from './UserActions'
 
-function Users() {
+export default function Users() {
   const dispatch = useDispatch()
-  const { users } = useSelector(state => state.users)
+  const users = useSelector(selectUsers)
   const [searchInput, setSearchInput] = useState('')
   const [filteredUsers, setFilteredUsers] = useState(null)
   const [useDataGrid, setUseDataGrid] = useState(false)
@@ -82,5 +82,3 @@ function Users() {
     </Grid>
   )
 }
-
-export default connect()(Users)

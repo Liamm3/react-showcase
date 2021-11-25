@@ -10,8 +10,8 @@ import { Provider } from 'react-redux'
 
 import reportWebVitals from './reportWebVitals'
 import './index.css'
-import App from './App'
-import store from './store'
+import App from './app/App'
+import store from './app/store'
 
 ReactDOM.render(
   <Provider store={store}>
