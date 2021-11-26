@@ -1,23 +1,20 @@
 import { connect, useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 
-import { fetchUsers, selectUsers, selectUser } from './userSlice'
+import { fetchUsers, selectUser } from './userSlice'
 
 function UserDetail(props) {
   const { id } = props.match.params
   const dispatch = useDispatch()
-  const users = useSelector(selectUsers)
   const user = useSelector(selectUser(id))
 
-  console.log(user)
-
   useEffect(() => {
-    if (!users) {
+    if (!user) {
       dispatch(fetchUsers())
     }
-  }, [dispatch, users])
+  }, [dispatch, user])
 
-  if (!users) {
+  if (!user) {
     return <p>Loading...</p>
   }
 

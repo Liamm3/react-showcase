@@ -10,6 +10,8 @@ import Login from '../features/auth/Login'
 import Logout from '../features/auth/Logout'
 import Viewer from '../features/viewer/Viewer'
 import Register from '../features/auth/Register'
+import Posts from '../features/posts/Posts'
+import FullPost from '../features/posts/FullPost'
 
 function Routes() {
   return (
@@ -19,6 +21,8 @@ function Routes() {
       <GuestRoute path="/register" component={Register} />
       <PrivateRoute path="/users/:id" component={UserDetail} />
       <PrivateRoute path="/users" component={Users} exact />
+      <PrivateRoute path="/posts" component={Posts} exact />
+      <PrivateRoute path="/posts/:id" component={FullPost} exact />
       <PrivateRoute path="/self" component={Viewer} exact />
       <Route path="/" component={Home} />
     </Switch>

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { gql } from '@apollo/client'
+
 import client from '../../app/client'
 
 const LOGIN = gql`
@@ -69,7 +70,9 @@ const slice = createSlice({
       state.viewerId = null
       state.token = null
     },
-    registerSuccess: (state, action) => {},
+    registerSuccess: (state, action) => {
+      state.loading = false
+    },
     registerFail: (state, action) => {
       state.error = action.payload
       state.loading = false
@@ -107,7 +110,7 @@ export const register =
     dispatch(registerStart())
     try {
       const user = { email, username, password }
-      const { data } = await client.mutate({
+      await client.mutate({
         mutation: REGISTER,
         variables: { user }
       })
