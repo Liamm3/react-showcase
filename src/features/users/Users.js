@@ -20,9 +20,7 @@ export default function Users() {
   const [useDataGrid, setUseDataGrid] = useState(false)
 
   useEffect(() => {
-    if (!users) {
-      dispatch(fetchUsers())
-    }
+    users ?? dispatch(fetchUsers())
   }, [dispatch, users])
 
   // TODO: use only loading

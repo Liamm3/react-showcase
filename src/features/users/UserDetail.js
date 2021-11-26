@@ -9,9 +9,7 @@ function UserDetail(props) {
   const user = useSelector(selectUser(id))
 
   useEffect(() => {
-    if (!user) {
-      dispatch(fetchUsers())
-    }
+    user ?? dispatch(fetchUsers())
   }, [dispatch, user])
 
   if (!user) {

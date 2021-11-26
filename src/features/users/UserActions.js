@@ -6,7 +6,6 @@ import UserDisplayView from './UserDisplayView'
 export default function UserActions({
   searchInput,
   handleUserInput,
-  searchUsers,
   resetUsers,
   toggleDataGrid
 }) {
@@ -16,7 +15,6 @@ export default function UserActions({
         <UserFilter
           searchInput={searchInput}
           handleUserInput={handleUserInput}
-          searchUsers={searchUsers}
           resetUsers={resetUsers}
         />
         <Button variant="contained" color="success">

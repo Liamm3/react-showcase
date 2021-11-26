@@ -58,11 +58,7 @@ export const fetchPosts =
   }
 
 export const selectPosts = state => state.posts.postList
-export const selectPost = id => state => {
-  const { postList } = state.posts
-  if (postList) {
-    return postList.find(post => post.id === id)
-  }
-}
+export const selectPost = id => state =>
+  state.posts.postList?.find(post => post.id === id)
 
 export default slice.reducer

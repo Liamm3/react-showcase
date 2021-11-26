@@ -11,9 +11,7 @@ export default function FullPost(props) {
   const post = useSelector(selectPost(id))
 
   useEffect(() => {
-    if (!post) {
-      dispatch(fetchPosts())
-    }
+    post ?? dispatch(fetchPosts())
   }, [dispatch, post])
 
   if (!post) {

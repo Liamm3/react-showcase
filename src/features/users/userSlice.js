@@ -50,26 +50,15 @@ export const selectUsers = state => state.users.users
 export const selectFilteredUsers = state => {
   const { users, filter } = state.users
   const { searchTerm } = filter
-  if (users) {
-    return users.filter(user =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  }
+  return users?.filter(user =>
+    user.username.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 }
 export const selectFilter = state => state.users.filter
-export const selectUser = id => state => {
-  const { users } = state.users
-  if (users) {
-    return users.find(user => user.id === id)
-  }
-}
-export const selectOwnUser = state => {
-  const { viewerId } = state.auth
-  const { users } = state.users
-  if (users) {
-    return users.find(user => user.id === viewerId)
-  }
-}
+export const selectUser = id => state =>
+  state.users.users?.find(user => user.id === id)
+export const selectOwnUser = state => selectUser(state.auth.viewerId)(state)
+export const selectLoading = state => state.users.loading
 
 export const fetchUsers =
   () =>

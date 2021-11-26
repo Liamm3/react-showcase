@@ -10,9 +10,7 @@ export default function Posts() {
   const posts = useSelector(selectPosts)
 
   useEffect(() => {
-    if (!posts) {
-      dispatch(fetchPosts())
-    }
+    posts ?? dispatch(fetchPosts())
   }, [dispatch, posts])
 
   if (!posts) {
